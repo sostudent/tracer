@@ -1,19 +1,33 @@
 # tracer
-tracer for running executables in linux
-(it does't work on mac or windows)
+
+It only parses the output from strace
+
 # install and run instuctions
 ```
-pip3 install python-ptrace
 gcc ex_1.c
-python3 trace_v1.py
+strace -f -tt -e trace=write,read,fork,clone,execve -s 100 -o output.txt ./a.out
+stdbuf -oL strace -f -e trace=write,read,fork,clone,openat,exit_group ./a.out 2>&1 | python3 parse_strace_v3.py
 ```
 
-ISO to install linux in a virtual machine: "https://mirrors.nxthost.com/rocky/9/isos/x86_64/Rocky-9.7-x86_64-minimal.iso"
-# requirements
+ISO to install linux in a virtual machine: 
+ - (x86/windows/linux) "https://mirrors.nxthost.com/rocky/9/isos/x86_64/Rocky-9.7-x86_64-minimal.iso"
+ - (arm/mac) "https://mirrors.nxthost.com/rocky/9/isos/aarch64/Rocky-9.7-aarch64-minimal.iso"
+
+What to run in the new installed virtual machine
 ```
-python3
-python-ptrace (it can be installed with pip3 install python-ptrace)
+hostname -I
+(after getting the IP, connect with ssh to the new virtual machine for easier access)
+ssh IP_OF_THE_VIRTUAL_MACHINE
+(optional to install python pip)
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+python3 get-pip.py 
+
+(optional to install vim)
+dnf install vim
+(it will install gcc, it can also be installed separatelly)
+dnf groupinstall "Development Tools"
 ```
+
 # simple c program
 ```
 #include <stdio.h>
@@ -25,49 +39,20 @@ int main(void){
 	printf("%d\n", pid1);
 }
 ```
-# output example from v2 for the tracer (it has collors + alignemnt, looks better in terminal)
+# output example from v2 for the tracer (it has collors + alignemnt, it looks better in the terminal)
 ```
---- Trace activ pe PID 9309 ---
-[PID 9309] [WRITE] FD 1: b'sleeping\n'
-sleeping
- └─ [PID 9311] [FORK ] (CHILD)  -> Rezultat: 0
-[PID 9309] [FORK ] (PARENT) -> Rezultat: 9311
-pid1 9311
-[PID 9309] [WRITE] FD 1: b'pid1 9311\n'
-[PID 9309] [EXIT ] Procesul s-a terminat.
-   └─ [PID 9316] [FORK ] (CHILD)  -> Rezultat: 0
- └─ [PID 9311] [FORK ] (PARENT) -> Rezultat: 9316
-pid2 9316
- └─ [PID 9311] [WRITE] FD 1: b'pid2 9316\n'
-pid1 0
-sleep 1
- └─ [PID 9311] [WRITE] FD 1: b'pid1 0\n'
-   └─ [PID 9316] [WRITE] FD 1: b'sleep 1\n'
- └─ [PID 9311] [EXIT ] Procesul s-a terminat.
-pid2 0
-   └─ [PID 9316] [WRITE] FD 1: b'pid2 0\n'
-pid1 0
-   └─ [PID 9316] [WRITE] FD 1: b'pid1 0\n'
-   └─ [PID 9316] [EXIT ] Procesul s-a terminat.
---- Trace finalizat ---
-```
-# output example for that simple c program from v1 of the tracer
-```
---- Trace activ pe PID 72446 ---
-[WRITE] PID 72446 (FD 1): b'sleeping\n'
-sleeping
-[FORK] PID 72447 (CHILD) -> Rezultat: 0
-0
-[WRITE] PID 72447 (FD 1): b'0\n'
-[EXIT] PID 72447 s-a terminat.
-[FORK] PID 72446 (PARENT) -> Rezultat: 72447
-72447
-[WRITE] PID 72446 (FD 1): b'72447\n'
-[EXIT] PID 72446 s-a terminat.
---- Trace finalizat ---
+--- Parser activ (Aștept date...) ---
+[PID MAIN] [READ ] Data: \177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0p
+[PID MAIN] [READ ] Data: \177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\00
+[PID MAIN] [WRITE] Text: sleeping\n
+[PID MAIN] [FORK ] Părintele a creat copilul: 43245
+ └─ [PID 43245] [WRITE] Text: 0\n
+ └─ [PID 43245] [EXIT ] Proces finalizat.
+[PID MAIN] [WRITE] Text: 43245\n
+[PID MAIN] [EXIT ] Proces finalizat.
 ```
 
 # intrebari
 - ce afiseaza daca se scoate \n de la printf
-- cum se poate ca sa afiseze numarul mare inaintea numarului mic
+- cum se poate ca sa afiseze numarul mai mare inaintea numarului mic
 
