@@ -7,7 +7,7 @@ It only parses the output from strace
 gcc ex_1.c
 strace -f -tt -e trace=write,read,fork,clone,execve -s 100 -o output.txt ./a.out
 strace -f -tt -e trace=write,read,fork,clone,execve,pipe,pipe2,open,close -s 100 -o output.txt ./a.out parametru
-stdbuf -oL strace -f -e trace=write,read,fork,clone,openat,exit_group ./a.out 2>&1 | python3 parse_strace_v3.py
+stdbuf -oL strace -f -tt -e trace=write,read,fork,clone,openat,exit_group,execve,pipe,pipe2,open,close ./a.out parametru 2>&1 | python3 parse_strace_v3.py
 ```
 
 ISO to install linux in a virtual machine: 
