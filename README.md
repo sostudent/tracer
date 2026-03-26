@@ -31,6 +31,7 @@ dnf groupinstall "Development Tools"
 # simple c program
 ```
 #include <stdio.h>
+#include <unistd.h>
 
 int main(void){
 	printf("sleeping\n");
