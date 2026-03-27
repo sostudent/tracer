@@ -1,7 +1,7 @@
 ## probleme in fuctie de nivelul de cunostinte
 
 # nivel -2
-2.2. Compilati si rulati programul de mai jos si explicati rezultatul. Pentru parametri folositi fisierul sursa C initial si un nou nume de fisier creat cu touch nume_fisier anterior.
+2.2. Compilati si rulati programul de mai jos si explicati rezultatul. Pentru parametri folositi fisierul sursa C initial si un nou nume de fisier creat anterior cu touch nume_fisier.
 ```c
 #include <fcntl.h>
 #include <stdlib.h>
