@@ -1,5 +1,59 @@
 ## probleme in fuctie de nivelul de cunostinte
 
+# nivel -2
+2.2. Compilati si rulati programul de mai jos si explicati rezultatul. Pentru parametri folositi fisierul sursa C initial si un nou nume de fisier creat cu touch nume_fisier anterior.
+```c
+#include <fcntl.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <unistd.h>
+int fdR, fdW;
+char c;
+int rd_wr();
+int main(int argc, char * argv[])
+{
+        if ( argc != 3) exit(1);
+        if (( fdR=open( argv[1], O_RDONLY)) == 1)
+                printf( "Eroare open1\n");
+        if (( fdW=open( argv[2], O_WRONLY)) == 1)
+                printf( "Eroare open2\n");
+        fork(); rd_wr(); exit(0);
+}
+int rd_wr() {
+        while (1 == 1){
+                if (read( fdR, &c, 1) == 0) return 0;
+                write(fdW, &c, 1);
+        }
+}
+```
+
+
+# nivel -1
+2.2. Compilati si rulati programul de mai jos si explicati rezultatul. Apoi modificati programul astfel incat sa functioneze corect (dupa ce identificati problema).
+```c
+#include <fcntl.h>
+#include <unistd.h>
+#include "hdr.h"
+int fdR, fdW;
+char c;
+main( int argc, char * argv[])
+{
+        if ( argc != 3) exit(1);
+        if (( fdR=open( argv[1], O_RDONLY)) == 1)
+                err_sys( "Eroare open1\n");
+        if (( fdW=open( argv[2], O_WRONLY)) == 1)
+                err_sys( "Eroare open2\n");
+        fork(); rd_wr(); exit(0);
+}
+rd_wr() {
+        for ever {
+                if ( read( fdR, &c, 1) == 0) return;
+                write( fdW, &c, 1);
+        }
+}
+```
+
+
 # nivelul 0
 Un proces care creaza alt proces iar noul proces creat afiseaza pidul procesului parinte
 
