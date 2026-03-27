@@ -18,22 +18,22 @@ ISO to install linux in a virtual machine:
  - (arm/mac) "https://mirrors.nxthost.com/rocky/9/isos/aarch64/Rocky-9.7-aarch64-minimal.iso"
 
 What to run in the new installed virtual machine
-```
+```bash
 hostname -I
-(after getting the IP, connect with ssh to the new virtual machine for easier access)
+# (after getting the IP, connect with ssh to the new virtual machine for easier access)
 ssh IP_OF_THE_VIRTUAL_MACHINE
-(optional to install python pip)
+# (optional to install python pip)
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 python3 get-pip.py 
 
-(optional to install vim)
+# (optional to install vim)
 dnf install vim
 (it will install gcc, it can also be installed separatelly)
 dnf groupinstall "Development Tools"
 ```
 
 # simple c program
-```
+```c
 #include <stdio.h>
 #include <unistd.h>
 
