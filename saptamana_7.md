@@ -1,7 +1,11 @@
 ## probleme in fuctie de nivelul de cunostinte
 
 # nivel -2
-2.2. Compilati si rulati programul de mai jos si explicati rezultatul. Pentru parametri folositi fisierul sursa C initial si un nou nume de fisier creat anterior cu touch nume_fisier.
+2.2. Compilati si rulati programul de mai jos si explicati rezultatul.
+
+Pentru parametri folositi un fisier `numere.txt` care are pe doua linii numerele de la 0 la 9 si un nou nume de fisier creat anterior cu `touch nume_fisier`.
+
+Adica `./main numere.txt nume_fisier`
 ```c
 #include <fcntl.h>
 #include <stdlib.h>
@@ -80,4 +84,4 @@ Un proces care creaza trei procese, apoi cele 3 procese creaza la randul lor alt
  - pidurile celorlalte 2 procese de pe nivelul 2 care nu sunt parintele direct (nu conteaza ordinea)
 
 # nivel 6
-Un proces care creaza 3 procese, apoi cele 3 procese creaza la randul lor alte 3 procese, iar procesul initial afieaza cele 10 puduri pentru toate cele 10 procese create (nu conteaza ordinea in care se afiseaza pidurile).
+Un proces care creaza 3 procese, apoi cele 3 procese creaza la randul lor alte 3 procese, iar procesul initial afieaza cele 10 puduri pentru toate cele 12 procese create (nu conteaza ordinea in care se afiseaza pidurile).
