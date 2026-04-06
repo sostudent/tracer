@@ -67,6 +67,8 @@ Un proces care creaza alt proces, iar noul proces creaza alt proces la randul lu
 # nivel 11
 Un proces care creaza alt proces, iar noul proces creaza alt proces la randul lui, iar primul proces afiseaza pidurile celorlalte 2 procese in ordine, adica pid proces 2 si apoi pid proces 3
 
+Fara semnale, pipe-uri, shared memory, trimitere de semnale. Doar cu wait, fork, exit.
+
 # nivel 2
 Un proces care creaza doua procese, apoi cele doua procese la randul lor creaza alt proces, si ultimele doua procese afiseaza pidurile proceselor parinte in ordinea in care au fost create
 
