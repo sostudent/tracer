@@ -2,7 +2,7 @@
 
 It only parses the output from strace
 
-# install and run instuctions
+# run instuctions
 ```
 gcc ex_1.c
 strace -f -tt -e trace=write,read,fork,clone,execve -s 100 -o output.txt ./a.out
