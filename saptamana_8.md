@@ -1,7 +1,7 @@
 ## probleme in fuctie de nivelul de cunostinte
 
 # nivel -3
-De compilat, rulat si de trimis un semnal cu `kill -14 [PID process]`
+De compilat, rulat si de trimis din alt terminal un semnal cu comanda `kill -14 [PID process]`
 ```c
 #include <setjmp.h>
 #include <signal.h>
